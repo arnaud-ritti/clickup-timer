@@ -1,0 +1,52 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer base {
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+  .no-drag * {
+    -webkit-app-region: no-drag;
+    pointer-events: all;
+  }
+  .drag {
+    -webkit-app-region: drag;
+  }
+}
+
+body,
+html,
+#app {
+  @apply w-full h-full bg-base-100 text-base-content scroll-smooth;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.n-notification__avatar {
+  display: flex;
+  align-items: center;
+  margin-top: -2px;
+}
+.n-notification-main__header {
+  font-weight: normal !important;
+  font-size: 1.1em !important;
+  opacity: 0.9;
+}
+
+.n-popover {
+  @apply !bg-neutral !text-neutral-content;
+}
+
+.n-popover .n-popover-arrow-wrapper {
+  @apply !border-neutral;
+}
+
+.n-popover .n-popover-arrow-wrapper .n-popover-arrow {
+  @apply !bg-neutral;
+}
