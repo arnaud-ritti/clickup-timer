@@ -1,0 +1,239 @@
+{
+  "action": {
+    "openInClickUp": "Open in ClickUp",
+    "openDetails": "Open details",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure ?",
+    "cancel": "Cancel",
+    "save": "Save",
+    "start": "Start",
+    "confirm": "Confirm",
+    "settings": "Settings",
+    "flushCaches": "Flush caches",
+    "flushCachesConfirm": "This will clear all locally cached ClickUp spaces, folders, lists, tasks, team members and tags",
+    "quit": "Quit"
+  },
+  "offline": {
+    "title": "You are offline",
+    "hint": "check your internet connection and press"
+  },
+  "members": {
+    "loading": "Hold on, fetching users in your workspaces...",
+    "noUsers": "Looks like there are no users in your oganization"
+  },
+  "entry": {
+    "empty": "Nothing found.",
+    "loading": "Loading...",
+    "form": {
+      "space": "Space",
+      "folder": "Folder",
+      "list": "List",
+      "task": "Task",
+      "description": "Description",
+      "billable": "Billable",
+      "duration": "Duration",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
+  },
+  "settings": {
+    "clickupAccessToken": "ClickUp Access token",
+    "clickupTeamId": "ClickUp Team ID",
+    "dayStartsAt": "Day starts at",
+    "dayEndsAt": "Day ends at",
+    "optionalFeatures": "Optional features",
+    "uiTheme": "UI Theme",
+    "showWeekends": "Show weekends",
+    "requireDescriptions": "Require descriptions",
+    "defaultBillable": "Mark as billable by default",
+    "dangerZone": "Danger zone",
+    "enableAdmin": {
+      "main": "Enable admin features",
+      "sub": "You must be a CU admin to use this"
+    }
+  },
+  "themes": {
+    "system": "Use system colors",
+    "light": "Light",
+    "dark": "Dark",
+    "cupcake": "Cupcake",
+    "bumblebee": "Bumblebee",
+    "emerald": "Emerald",
+    "corporate": "Corporate",
+    "synthwave": "Synthwave",
+    "retro": "Retro",
+    "cyberpunk": "Cyberpunk",
+    "valentine": "Valentine",
+    "halloween": "Halloween",
+    "garden": "Garden",
+    "forest": "Forest",
+    "aqua": "Aqua",
+    "lofi": "Lo-fi",
+    "pastel": "Pastel",
+    "fantasy": "Fantasy",
+    "wireframe": "Wireframe",
+    "black": "Black",
+    "luxury": "Luxury",
+    "dracula": "Dracula",
+    "cmyk": "CMYK",
+    "autumn": "Autumn",
+    "business": "Business",
+    "acid": "Acid",
+    "lemonade": "Lemonade",
+    "night": "Night",
+    "coffee": "Coffee",
+    "winter": "Winter"
+  },
+  "notification": {
+    "settingsSaved": "Settings saved!",
+    "cachesFlushed": "All caches flushed!",
+    "noAccess": {
+      "title": "You don't have access",
+      "content": "You need to be the workspace administrator in order to see other people's tracking entries"
+    },
+    "fetchEvents": {
+      "title": "Could not fetch time tracking entries",
+      "content": "Check your console & internet connection and try again"
+    },
+    "fetchCurrentTimer": {
+      "title": "Could not fetch current timer",
+      "content": "Check your console & internet connection and try again"
+    },
+    "duplicate": {
+      "title": "Duplication failed",
+      "content": "There was a problem while pushing to Clickup. Check your console & internet connection and try again"
+    },
+    "delete": {
+      "title": "Delete failed",
+      "content": "There was a problem while calling Clickup. Check your console & internet connection and try again"
+    },
+    "update": {
+      "title": "Update failed",
+      "content": "There was a problem while pushing to Clickup. Check your console & internet connection and try again"
+    },
+    "createTimerError": {
+      "title": "Looks like something went wrong",
+      "content": "There was a problem while pushing to Clickup. Check your console & internet connection and try again"
+    },
+    "fetchSpaces": {
+      "title": "Failed to fetch Clickup spaces in the background",
+      "content": "You can try again later by pressing the refresh button when searching for a space"
+    },
+    "fetchFolders": {
+      "title": "Failed to fetch Clickup folders in the background",
+      "content": "You can try again later by pressing the refresh button when searching for a folder"
+    },
+    "fetchLists": {
+      "title": "Failed to fetch Clickup lists in the background",
+      "content": "You can try again later by pressing the refresh button when searching for a list"
+    },
+    "fetchTasks": {
+      "title": "Failed to fetch Clickup tasks in the background",
+      "content": "You can try again later by pressing the refresh button when searching for a task"
+    }
+  },
+  "validations": {
+    "required": "The field {property} is required.",
+    "minLength": "The {property} field has a value of '{model}', but it must have a min length of {min}.",
+    "clickup_access_token": {
+      "required": "Please input your ClickUp Access Token",
+      "minLenght": "Please input your ClickUp Access Token",
+      "valid": "This token couldn't be validated with ClickUp. Please verify."
+    },
+    "clickup_team_id": {
+      "required": "Please input your ClickUp Team ID",
+      "minLenght": "Please input your ClickUp Team ID"
+    },
+    "day_start": {
+      "valid": "Must be less than the end of day"
+    },
+    "day_end": {
+      "valid": "Must be more than the start of day"
+    },
+    "space": {
+      "required": "Please select a Space"
+    },
+    "folder": {
+      "required": "Please select a Folder"
+    },
+    "list": {
+      "required": "Please select a Task List"
+    },
+    "task": {
+      "required": "Please select a Task"
+    },
+    "description": {
+      "required": "Please provide a description"
+    }
+  },
+  "menu": {
+    "about": "About {{name}}",
+    "hide": "Hide {{name}}",
+    "hideOthers": "Hide others",
+    "showAll": "Show All",
+    "quit": "Quit",
+    "undo": "Undo",
+    "redo": "Redo",
+    "cut": "Cut",
+    "copy": "Copy",
+    "paste": "Paste",
+    "selectAll": "Select All",
+    "reload": "Reload",
+    "edit": "Edit",
+    "view": "View",
+    "window": "Window",
+    "help": "Help",
+    "minimize": "Minimize",
+    "close": "Close",
+    "bringAllToFront": "Bring All to Front",
+    "toggleFullScreen": "Toggle Full Screen",
+    "toggleDevTools": "Toggle Developer Tools",
+    "settings": "Settings",
+    "checkUpdate": "Check for updates",
+    "timer": "Timer",
+    "startTimer": "Start timer",
+    "stopTimer": "Stop timer",
+    "timeTracker": "Time Tracker",
+    "openSelected": "Open the selected time entry",
+    "duplicateSelected": "Duplicate the selected time entry",
+    "deleteSelected": "Delete the selected time entry",
+    "publicRepo": "Check out the public repository",
+    "sponsorMe": "Sponsor me on GitHub  ❤"
+  },
+  "touchbar": {
+    "startTimer": "Start timer",
+    "stopTimer": "Stop timer"
+  },
+  "tray": {
+    "startTimer": "Start timer",
+    "stopTimer": "Stop timer",
+    "open": "Open {{name}}",
+    "about": "About {{name}}",
+    "settings": "Settings",
+    "quit": "Quit",
+    "checkUpdate": "Check for updates"
+  },
+  "update": {
+    "noUpdate": {
+      "title": "No Updates",
+      "message": "Current version is up-to-date."
+    },
+    "available": {
+      "title": "Update available",
+      "message": "Looks like there is an update available\n\nClick below to head over to the downloads page\n\nThanks for using {{ name }}! ♥\n\nIf you like this app and want to support future development I would greatly appreciate it if you'd consider sponsoring this project",
+      "buttons": {
+        "download": "Download update",
+        "sponsor": "Sponsor the project",
+        "cancel": "Cancel"
+      }
+    },
+    "error": {
+      "title": "Something went wrong whilst updating the app",
+      "message": "Unable to check for updates",
+      "buttons": {
+        "download": "Download manually",
+        "cancel": "Cancel"
+      }
+    }
+  }
+}
