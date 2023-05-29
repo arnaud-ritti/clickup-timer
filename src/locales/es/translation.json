@@ -1,0 +1,239 @@
+{
+  "action": {
+    "openInClickUp": "Abrir en ClickUp",
+    "openDetails": "Abrir detalles",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Estás seguro?",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "start": "Comenzar",
+    "confirm": "Confirmar",
+    "settings": "Configuración",
+    "flushCaches": "Vaciar cachés",
+    "flushCachesConfirm": "Esto eliminará todas las cachés locales de espacios, carpetas, listas, tareas, miembros del equipo y etiquetas de ClickUp",
+    "quit": "Salir"
+  },
+  "offline": {
+    "title": "Estás sin conexión",
+    "hint": "Verifica tu conexión a Internet y presiona"
+  },
+  "members": {
+    "loading": "Espera, buscando usuarios en tus espacios de trabajo...",
+    "noUsers": "Parece que no hay usuarios en tu organización"
+  },
+  "entry": {
+    "empty": "No se encontró nada.",
+    "loading": "Cargando...",
+    "form": {
+      "space": "Espacio",
+      "folder": "Carpeta",
+      "list": "Lista",
+      "task": "Tarea",
+      "description": "Descripción",
+      "billable": "Facturable",
+      "duration": "Duración",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha de finalización"
+    }
+  },
+  "settings": {
+    "clickupAccessToken": "Token de acceso de ClickUp",
+    "clickupTeamId": "ID de equipo de ClickUp",
+    "dayStartsAt": "El día comienza a las",
+    "dayEndsAt": "El día termina a las",
+    "optionalFeatures": "Funciones opcionales",
+    "uiTheme": "Tema de interfaz de usuario",
+    "showWeekends": "Mostrar fines de semana",
+    "requireDescriptions": "Requerir descripciones",
+    "defaultBillable": "Marcar como facturable de forma predeterminada",
+    "dangerZone": "Zona de peligro",
+    "enableAdmin": {
+      "main": "Habilitar funciones de administrador",
+      "sub": "Debes ser un administrador de CU para usar esto"
+    }
+  },
+  "themes": {
+    "system": "Usar colores del sistema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "cupcake": "Cupcake",
+    "bumblebee": "Abejorro",
+    "emerald": "Esmeralda",
+    "corporate": "Corporativo",
+    "synthwave": "Synthwave",
+    "retro": "Retrò",
+    "cyberpunk": "Cyberpunk",
+    "valentine": "San Valentín",
+    "halloween": "Halloween",
+    "garden": "Jardín",
+    "forest": "Bosque",
+    "aqua": "Agua",
+    "lofi": "Lo-fi",
+    "pastel": "Pastel",
+    "fantasy": "Fantasía",
+    "wireframe": "Maqueta",
+    "black": "Negro",
+    "luxury": "Lujo",
+    "dracula": "Drácula",
+    "cmyk": "CMYK",
+    "autumn": "Otoño",
+    "business": "Negocios",
+    "acid": "Ácido",
+    "lemonade": "Limonada",
+    "night": "Noche",
+    "coffee": "Café",
+    "winter": "Invierno"
+  },
+  "notification": {
+    "settingsSaved": "¡Configuración guardada!",
+    "cachesFlushed": "¡Se han vaciado todas las cachés!",
+    "noAccess": {
+      "title": "No tienes acceso",
+      "content": "Debes ser el administrador del espacio de trabajo para ver los registros de tiempo de otras personas"
+    },
+    "fetchEvents": {
+      "title": "No se pudieron obtener los registros de seguimiento de tiempo",
+      "content": "Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "fetchCurrentTimer": {
+      "title": "No se pudo obtener el temporizador actual",
+      "content": "Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "duplicate": {
+      "title": "Error al duplicar",
+      "content": "Hubo un problema al enviar a Clickup. Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "delete": {
+      "title": "Error al eliminar",
+      "content": "Hubo un problema al llamar a Clickup. Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "update": {
+      "title": "Error al actualizar",
+      "content": "Hubo un problema al enviar a Clickup. Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "createTimerError": {
+      "title": "Parece que algo salió mal",
+      "content": "Hubo un problema al enviar a Clickup. Verifica tu consola y conexión a Internet, y vuelve a intentarlo"
+    },
+    "fetchSpaces": {
+      "title": "No se pudieron obtener los espacios de Clickup en segundo plano",
+      "content": "Puedes intentarlo más tarde presionando el botón de actualización al buscar un espacio"
+    },
+    "fetchFolders": {
+      "title": "No se pudieron obtener las carpetas de Clickup en segundo plano",
+      "content": "Puedes intentarlo más tarde presionando el botón de actualización al buscar una carpeta"
+    },
+    "fetchLists": {
+      "title": "No se pudieron obtener las listas de Clickup en segundo plano",
+      "content": "Puedes intentarlo más tarde presionando el botón de actualización al buscar una lista"
+    },
+    "fetchTasks": {
+      "title": "No se pudieron obtener las tareas de Clickup en segundo plano",
+      "content": "Puedes intentarlo más tarde presionando el botón de actualización al buscar una tarea"
+    }
+  },
+  "validations": {
+    "required": "El campo {property} es obligatorio.",
+    "minLength": "El campo {property} tiene un valor de '{model}', pero debe tener una longitud mínima de {min}.",
+    "clickup_access_token": {
+      "required": "Por favor, ingresa tu Token de Acceso de ClickUp",
+      "minLenght": "Por favor, ingresa tu Token de Acceso de ClickUp",
+      "valid": "No se pudo validar este token con ClickUp. Por favor, verifica."
+    },
+    "clickup_team_id": {
+      "required": "Por favor, ingresa tu ID de Equipo de ClickUp",
+      "minLenght": "Por favor, ingresa tu ID de Equipo de ClickUp"
+    },
+    "day_start": {
+      "valid": "Debe ser menor que el final del día"
+    },
+    "day_end": {
+      "valid": "Debe ser mayor que el inicio del día"
+    },
+    "space": {
+      "required": "Por favor, selecciona un Espacio"
+    },
+    "folder": {
+      "required": "Por favor, selecciona una Carpeta"
+    },
+    "list": {
+      "required": "Por favor, selecciona una Lista de Tareas"
+    },
+    "task": {
+      "required": "Por favor, selecciona una Tarea"
+    },
+    "description": {
+      "required": "Por favor, proporciona una descripción"
+    }
+  },
+  "menu": {
+    "about": "Acerca de {{name}}",
+    "hide": "Ocultar {{name}}",
+    "hideOthers": "Ocultar otros",
+    "showAll": "Mostrar todo",
+    "quit": "Salir",
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "cut": "Cortar",
+    "copy": "Copiar",
+    "paste": "Pegar",
+    "selectAll": "Seleccionar todo",
+    "reload": "Recargar",
+    "edit": "Editar",
+    "view": "Ver",
+    "window": "Ventana",
+    "help": "Ayuda",
+    "minimize": "Minimizar",
+    "close": "Cerrar",
+    "bringAllToFront": "Traer todo al frente",
+    "toggleFullScreen": "Alternar pantalla completa",
+    "toggleDevTools": "Alternar herramientas de desarrollo",
+    "settings": "Configuración",
+    "checkUpdate": "Buscar actualizaciones",
+    "timer": "Temporizador",
+    "startTimer": "Iniciar temporizador",
+    "stopTimer": "Detener temporizador",
+    "timeTracker": "Seguimiento de tiempo",
+    "openSelected": "Abrir la entrada de tiempo seleccionada",
+    "duplicateSelected": "Duplicar la entrada de tiempo seleccionada",
+    "deleteSelected": "Eliminar la entrada de tiempo seleccionada",
+    "publicRepo": "Ver repositorio público",
+    "sponsorMe": "Patrocíname en GitHub ❤"
+  },
+  "touchbar": {
+    "startTimer": "Iniciar temporizador",
+    "stopTimer": "Detener temporizador"
+  },
+  "tray": {
+    "startTimer": "Iniciar temporizador",
+    "stopTimer": "Detener temporizador",
+    "open": "Abrir {{name}}",
+    "about": "Acerca de {{name}}",
+    "settings": "Configuración",
+    "quit": "Salir",
+    "checkUpdate": "Buscar actualizaciones"
+  },
+  "update": {
+    "noUpdate": {
+      "title": "Sin actualizaciones",
+      "message": "La versión actual está actualizada."
+    },
+    "available": {
+      "title": "Actualización disponible",
+      "message": "Parece que hay una actualización disponible\n\nHaz clic a continuación para ir a la página de descargas\n\n¡Gracias por usar {{name}}! ♥\n\nSi te gusta esta aplicación y deseas apoyar el desarrollo futuro, agradecería mucho que consideres patrocinar este proyecto",
+      "buttons": {
+        "download": "Descargar actualización",
+        "sponsor": "Patrocinar el proyecto",
+        "cancel": "Cancelar"
+      }
+    },
+    "error": {
+      "title": "Algo salió mal al actualizar la aplicación",
+      "message": "No se puede buscar actualizaciones",
+      "buttons": {
+        "download": "Descargar manualmente",
+        "cancel": "Cancelar"
+      }
+    }
+  }
+}
