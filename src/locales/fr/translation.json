@@ -1,0 +1,239 @@
+{
+  "action": {
+    "openInClickUp": "Ouvrir dans ClickUp",
+    "openDetails": "Ouvrir les détails",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr ?",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "start": "Démarrer",
+    "confirm": "Confirmer",
+    "settings": "Paramètres",
+    "flushCaches": "Vider le cache",
+    "flushCachesConfirm": "Cela effacera localement tous les espaces, dossiers, listes, tâches, membres de l'équipe et balises ClickUp en cache",
+    "quit": "Quitter"
+  },
+  "offline": {
+    "title": "Vous êtes hors ligne",
+    "hint": "Vérifiez votre connexion Internet et appuyez sur"
+  },
+  "members": {
+    "loading": "Veuillez patienter, récupération des utilisateurs dans vos espaces de travail...",
+    "noUsers": "Il semble qu'il n'y ait aucun utilisateur dans votre organisation"
+  },
+  "entry": {
+    "empty": "Rien n'a été trouvé.",
+    "loading": "Chargement...",
+    "form": {
+      "space": "Espace",
+      "folder": "Dossier",
+      "list": "Liste",
+      "task": "Tâche",
+      "description": "Description",
+      "billable": "Facturable",
+      "duration": "Durée",
+      "startDate": "Date de début",
+      "endDate": "Date de fin"
+    }
+  },
+  "settings": {
+    "clickupAccessToken": "Jeton d'accès ClickUp",
+    "clickupTeamId": "ID de l'équipe ClickUp",
+    "dayStartsAt": "Le jour commence à",
+    "dayEndsAt": "Le jour se termine à",
+    "optionalFeatures": "Fonctionnalités optionnelles",
+    "uiTheme": "Thème de l'interface utilisateur",
+    "showWeekends": "Afficher les week-ends",
+    "requireDescriptions": "Exiger des descriptions",
+    "defaultBillable": "Marquer comme facturable par défaut",
+    "dangerZone": "Zone dangereuse",
+    "enableAdmin": {
+      "main": "Activer les fonctionnalités d'administration",
+      "sub": "Vous devez être administrateur de CU pour utiliser cela"
+    }
+  },
+  "themes": {
+    "system": "Utiliser les couleurs du système",
+    "light": "Clair",
+    "dark": "Sombre",
+    "cupcake": "Cupcake",
+    "bumblebee": "Bumblebee",
+    "emerald": "Emeraude",
+    "corporate": "Corporatif",
+    "synthwave": "Synthwave",
+    "retro": "Rétro",
+    "cyberpunk": "Cyberpunk",
+    "valentine": "Saint Valentin",
+    "halloween": "Halloween",
+    "garden": "Jardin",
+    "forest": "Forêt",
+    "aqua": "Aqua",
+    "lofi": "Lo-fi",
+    "pastel": "Pastel",
+    "fantasy": "Fantaisie",
+    "wireframe": "Wireframe",
+    "black": "Noir",
+    "luxury": "Luxe",
+    "dracula": "Dracula",
+    "cmyk": "CMYK",
+    "autumn": "Automne",
+    "business": "Affaires",
+    "acid": "Acide",
+    "lemonade": "Limonade",
+    "night": "Nuit",
+    "coffee": "Café",
+    "winter": "Hiver"
+  },
+  "notification": {
+    "settingsSaved": "Paramètres enregistrés !",
+    "cachesFlushed": "Tous les caches ont été vidés !",
+    "noAccess": {
+      "title": "Vous n'avez pas accès",
+      "content": "Vous devez être l'administrateur de l'espace de travail pour voir les entrées de suivi des autres personnes"
+    },
+    "fetchEvents": {
+      "title": "Impossible de récupérer les entrées de suivi du temps",
+      "content": "Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "fetchCurrentTimer": {
+      "title": "Impossible de récupérer le minuteur en cours",
+      "content": "Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "duplicate": {
+      "title": "Échec de la duplication",
+      "content": "Un problème est survenu lors de l'envoi vers Clickup. Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "delete": {
+      "title": "Échec de la suppression",
+      "content": "Un problème est survenu lors de l'appel à Clickup. Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "update": {
+      "title": "Échec de la mise à jour",
+      "content": "Un problème est survenu lors de l'envoi vers Clickup. Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "createTimerError": {
+      "title": "Il semble que quelque chose se soit mal passé",
+      "content": "Un problème est survenu lors de l'envoi vers Clickup. Vérifiez votre console et votre connexion internet, puis réessayez"
+    },
+    "fetchSpaces": {
+      "title": "Échec de la récupération des espaces Clickup en arrière-plan",
+      "content": "Vous pouvez réessayer ultérieurement en appuyant sur le bouton de rafraîchissement lors de la recherche d'un espace"
+    },
+    "fetchFolders": {
+      "title": "Échec de la récupération des dossiers Clickup en arrière-plan",
+      "content": "Vous pouvez réessayer ultérieurement en appuyant sur le bouton de rafraîchissement lors de la recherche d'un dossier"
+    },
+    "fetchLists": {
+      "title": "Échec de la récupération des listes Clickup en arrière-plan",
+      "content": "Vous pouvez réessayer ultérieurement en appuyant sur le bouton de rafraîchissement lors de la recherche d'une liste"
+    },
+    "fetchTasks": {
+      "title": "Échec de la récupération des tâches Clickup en arrière-plan",
+      "content": "Vous pouvez réessayer ultérieurement en appuyant sur le bouton de rafraîchissement lors de la recherche d'une tâche"
+    }
+  },
+  "validations": {
+    "required": "Le champ {property} est requis.",
+    "minLength": "Le champ {property} a une valeur de '{model}', mais il doit avoir une longueur minimale de {min}.",
+    "clickup_access_token": {
+      "required": "Veuillez saisir votre jeton d'accès ClickUp",
+      "minLenght": "Veuillez saisir votre jeton d'accès ClickUp",
+      "valid": "Ce jeton n'a pas pu être validé avec ClickUp. Veuillez vérifier."
+    },
+    "clickup_team_id": {
+      "required": "Veuillez saisir l'ID de votre équipe ClickUp",
+      "minLenght": "Veuillez saisir l'ID de votre équipe ClickUp"
+    },
+    "day_start": {
+      "valid": "Doit être inférieur à la fin de la journée"
+    },
+    "day_end": {
+      "valid": "Doit être supérieur au début de la journée"
+    },
+    "space": {
+      "required": "Veuillez sélectionner un espace"
+    },
+    "folder": {
+      "required": "Veuillez sélectionner un dossier"
+    },
+    "list": {
+      "required": "Veuillez sélectionner une liste de tâches"
+    },
+    "task": {
+      "required": "Veuillez sélectionner une tâche"
+    },
+    "description": {
+      "required": "Veuillez fournir une description"
+    }
+  },
+  "menu": {
+    "about": "À propos de {{name}}",
+    "hide": "Masquer {{name}}",
+    "hideOthers": "Masquer les autres",
+    "showAll": "Tout afficher",
+    "quit": "Quitter",
+    "undo": "Annuler",
+    "redo": "Rétablir",
+    "cut": "Couper",
+    "copy": "Copier",
+    "paste": "Coller",
+    "selectAll": "Sélectionner tout",
+    "reload": "Recharger",
+    "edit": "Éditer",
+    "view": "Afficher",
+    "window": "Fenêtre",
+    "help": "Aide",
+    "minimize": "Minimiser",
+    "close": "Fermer",
+    "bringAllToFront": "Amener tout à l'avant",
+    "toggleFullScreen": "Activer/désactiver le mode plein écran",
+    "toggleDevTools": "Activer/désactiver les outils de développement",
+    "settings": "Paramètres",
+    "checkUpdate": "Vérifier les mises à jour",
+    "timer": "Minuteur",
+    "startTimer": "Démarrer le minuteur",
+    "stopTimer": "Arrêter le minuteur",
+    "timeTracker": "Suivi du temps",
+    "openSelected": "Ouvrir l'entrée de temps sélectionnée",
+    "duplicateSelected": "Dupliquer l'entrée de temps sélectionnée",
+    "deleteSelected": "Supprimer l'entrée de temps sélectionnée",
+    "publicRepo": "Consulter le dépôt public",
+    "sponsorMe": "Soutenez-moi sur GitHub ❤"
+  },
+  "touchbar": {
+    "startTimer": "Démarrer le minuteur",
+    "stopTimer": "Arrêter le minuteur"
+  },
+  "tray": {
+    "startTimer": "Démarrer le minuteur",
+    "stopTimer": "Arrêter le minuteur",
+    "open": "Ouvrir {{name}}",
+    "about": "À propos de {{name}}",
+    "settings": "Paramètres",
+    "quit": "Quitter",
+    "checkUpdate": "Vérifier les mises à jour"
+  },
+  "update": {
+    "noUpdate": {
+      "title": "Aucune mise à jour",
+      "message": "La version actuelle est à jour."
+    },
+    "available": {
+      "title": "Mise à jour disponible",
+      "message": "Il semble qu'une mise à jour soit disponible\n\nCliquez ci-dessous pour accéder à la page de téléchargements\n\nMerci d'utiliser {{ name }} ! ♥\n\nSi vous aimez cette application et souhaitez soutenir son développement futur, je vous serais très reconnaissant de considérer le parrainage de ce projet",
+      "buttons": {
+        "download": "Télécharger la mise à jour",
+        "sponsor": "Soutenir le projet",
+        "cancel": "Annuler"
+      }
+    },
+    "error": {
+      "title": "Quelque chose s'est mal passé lors de la mise à jour de l'application",
+      "message": "Impossible de vérifier les mises à jour",
+      "buttons": {
+        "download": "Télécharger manuellement",
+        "cancel": "Annuler"
+      }
+    }
+  }
+}
