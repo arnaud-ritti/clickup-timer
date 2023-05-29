@@ -1,0 +1,143 @@
+@import 'vue-cal/dist/vuecal.css';
+
+.vuecal {
+  /* $block: &; */
+
+  /*
+    |--------------------------------------------------------------------------
+    | Title bar & controls
+    |--------------------------------------------------------------------------
+    */
+
+  &__now-line {
+    @apply text-primary;
+  }
+
+  /* Make title bar draggable */
+  &__title-bar {
+    @apply bg-base-300 z-10;
+
+    /* Order title bar controls */
+    & .vuecal__title {
+      order: 1;
+      font-size: 0.7em;
+      margin: 0 4px;
+
+      justify-content: flex-end;
+    }
+
+    & .vuecal__arrow {
+      @apply text-base-content;
+    }
+
+    & .vuecal__arrow--prev {
+      order: 2;
+    }
+    & .vuecal__today-btn {
+      order: 3;
+    }
+    & .vuecal__arrow--next {
+      order: 4;
+    }
+  }
+
+  /*
+    |--------------------------------------------------------------------------
+    |  Style the calendar itself
+    |--------------------------------------------------------------------------
+    */
+  &__header {
+    @apply w-full fixed bg-base-200 z-[9];
+    @apply text-base-content;
+  }
+
+  &__body {
+    margin-top: 89px; /* 90px - 1px */
+  }
+
+  &__cell {
+    &:before {
+      @apply border border-base-content border-opacity-25;
+    }
+  }
+
+  &__cell &__event * {
+    user-select: none;
+  }
+
+  &__cell--selected {
+    @apply bg-base-200 bg-opacity-40;
+  }
+  &__cell--today {
+    @apply bg-base-300 bg-opacity-40;
+  }
+
+  &__time-column {
+    @apply !w-14;
+  }
+
+  &__time-column &__time-cell {
+    @apply text-base-content font-bold p-0 text-center;
+  }
+
+  &__time-column &__time-cell-line:before {
+    @apply border-t border-base-content border-opacity-25;
+  }
+  &__time-column &__time-cell-label {
+    @apply inline-block pt-1 px-1;
+  }
+
+  &__no-event {
+    @apply text-base-content;
+  }
+
+  &__weekdays-headings {
+    @apply border-b-0 shadow mb-0 !pl-14;
+  }
+
+  /*
+    |--------------------------------------------------------------------------
+    |  Style the events
+    |--------------------------------------------------------------------------
+    */
+  &__event {
+    /* $element: &; */
+    transition: transform 0.08s;
+    @apply rounded-sm p-1 bg-accent text-accent-content text-left;
+    @apply border-[0.5px] border-b-accent-focus border-base-content border-t-2;
+
+    &-title {
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-resize-handle {
+      height: 0.5em;
+      @apply bg-accent-focus;
+    }
+
+    &-task-info-popover {
+      opacity: 0;
+      transition-property: opacity;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    &:hover {
+      .vuecal__event-task-info-popover {
+        opacity: 1;
+      }
+    }
+
+    &--focus {
+      transform: scale(1.025);
+      @apply shadow;
+    }
+
+    &.not-editable {
+      @apply bg-error text-error-content;
+    }
+  }
+}
