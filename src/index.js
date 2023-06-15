@@ -8,6 +8,7 @@ import {
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import currentTimerObserver from '@core/electron/currentTimerObserver';
 import updater from '@core/electron/updater';
+import TrayBuilder from '@core/electron/tray';
 import { createWindow, createCreateTimerWindow } from '@core/electron/windows';
 import { stopTimeTrackingEntry } from '@core/helpers/electron';
 import { mainBindings, clearMainBindings } from '@core/i18n/backend';
@@ -56,11 +57,17 @@ app.on('ready', async () => {
   clearMainBindings(ipcMain);
   mainBindings(ipcMain, fs);
 
-  await updater.bindEvents();
+  await new TrayBuilder().buildTray();
 
   await createWindow();
 
-  await updater.checkForUpdatesAndNotify();
+  await updater.checkForUpdates();
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 app.on('activate', async () => {

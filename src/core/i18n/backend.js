@@ -1,4 +1,3 @@
-import { app, dialog, shell } from 'electron';
 import { cloneDeep, merge } from 'lodash';
 const path = require('path');
 const fs = require('fs');

@@ -1,4 +1,4 @@
-import request from 'request';
+import ky from 'ky';
 import store from '@core/store';
 import cache from '@core/store/cache';
 
@@ -18,38 +18,26 @@ const teamRootUrl = () => {
   return `${BASE_URL}/team/${store.get('settings.clickup_team_id')}`;
 };
 
-const tokenValid = (token) => {
+const tokenValid = async (token) => {
   if (!token) {
     return false;
   }
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: BASE_URL + '/user',
-        headers: {
-          Authorization: token,
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
 
-        if (data.user) {
-          cache.put(
-            USER_CACHE_KEY,
-            data.user,
-            3600 * 6 // plus 6 hours
-          );
-        }
-
-        resolve(data.user || null);
-      }
+  const response = await ky(`${BASE_URL}/user`, {
+    method: 'GET',
+    headers: {
+      Authorization: token
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  if (response.user) {
+    cache.put(
+      USER_CACHE_KEY,
+      response.user,
+      3600 * 6 // plus 6 hours
     );
-  });
+  }
+  return response.user || null;
 };
 
 const getUser = async () => {
@@ -63,37 +51,25 @@ const getUser = async () => {
   }
 };
 
-const getUsers = () => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        url: `${BASE_URL}/team/`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
+const getUsers = async () => {
+  const response = await ky(`${BASE_URL}/team`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.teams
+    .flatMap((team) => team.members)
+    .map((member) => member.user)
+    .filter((user) => user.role !== 4) // Remove guests
+    .filter((user, index, self) => self.indexOf(user) === index) // only unique id's
+    .sort(function (a, b) {
+      // sort alphabetically by name
+      if (a.username === b.username) return 0;
 
-        const teams = JSON.parse(response.body).teams;
-        const users = teams
-          .flatMap((team) => team.members)
-          .map((member) => member.user)
-          .filter((user) => user.role !== 4) // Remove guests
-          .filter((user, index, self) => self.indexOf(user) === index) // only unique id's
-          .sort(function (a, b) {
-            // sort alphabetically by name
-            if (a.username === b.username) return 0;
-
-            return a.username < b.username ? -1 : 1;
-          });
-
-        resolve(users);
-      }
-    );
-  });
+      return a.username < b.username ? -1 : 1;
+    });
 };
 
 const getCachedUsers = async () => {
@@ -114,77 +90,54 @@ const clearCachedUsers = () => {
   cache.clear(USERS_CACHE_KEY);
 };
 
-const getTimeTrackingRange = (start, end, userId) => {
-  return new Promise((resolve, reject) => {
-    const params = {
-      start_date: start.valueOf(),
-      end_date: end.valueOf(),
-      include_location_names: true,
-      include_task_tags: true
-    };
+const getTimeTrackingRange = async (start, end, userId) => {
+  const params = {
+    start_date: start.valueOf(),
+    end_date: end.valueOf(),
+    include_location_names: true,
+    include_task_tags: true
+  };
 
-    // Only set assignee when argument was given
-    if (userId) {
-      params.assignee = userId;
-    }
+  // Only set assignee when argument was given
+  if (userId) {
+    params.assignee = userId;
+  }
 
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: `${teamRootUrl()}/time_entries?` + new URLSearchParams(params),
-
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data || []);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/time_entries`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    },
+    searchParams: params
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || [];
 };
 
 const getTasks = async (list) => {
   let page = 0;
   let results = [];
 
-  const getTasksPage = (page, list) => {
+  const getTasksPage = async (page, list) => {
     page = page || 0;
 
-    return new Promise((resolve, reject) => {
-      request(
-        {
-          method: 'GET',
-          mode: 'no-cors',
-          url:
-            (list
-              ? `${BASE_URL}/list/${list}/task?`
-              : `${teamRootUrl()}/task?`) +
-            new URLSearchParams({
-              page: page,
-              include_closed: true,
-              subtasks: true,
-              reverse: true
-            }),
-
-          headers: {
-            Authorization: store.get('settings.clickup_access_token'),
-            'Content-Type': 'application/json'
-          }
+    const response = await ky(
+      list ? `${BASE_URL}/list/${list}/task` : `${teamRootUrl()}/task`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: store.get('settings.clickup_access_token')
         },
-        (error, response) => {
-          if (error) return reject(error);
-          const data = response?.body ? JSON.parse(response.body) : null;
-          if (error || data?.ECODE) return reject(error || data);
-          resolve(data.tasks || []);
+        searchParams: {
+          page: page,
+          include_closed: true,
+          subtasks: true,
+          reverse: true
         }
-      );
-    });
+      }
+    ).json();
+    if (response?.ECODE) throw new Error(response?.ECODE);
+    return response.tasks || [];
   };
 
   do {
@@ -225,36 +178,24 @@ const clearCachedTasks = (list) => {
   cache.clear(`${TASKS_CACHE_KEY}${list ? '.' + list : ''}`);
 };
 
-const getTimeEntry = (entryId) => {
-  return new Promise((resolve, reject) => {
-    const params = {
-      include_location_names: true,
-      include_task_tags: true
-    };
+const getTimeEntry = async (entryId) => {
+  const params = {
+    include_location_names: true,
+    include_task_tags: true
+  };
 
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url:
-          `${teamRootUrl()}/time_entries/${entryId}?` +
-          new URLSearchParams(params),
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data || []);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/time_entries/${entryId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    },
+    searchParams: params
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || [];
 };
 
-const createTimeTrackingEntry = (
+const createTimeTrackingEntry = async (
   taskId,
   description,
   start,
@@ -262,35 +203,25 @@ const createTimeTrackingEntry = (
   tags,
   billable
 ) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'POST',
-        url: `${teamRootUrl()}/time_entries`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          description,
-          tid: taskId,
-          start: start.valueOf(),
-          duration: end.valueOf() - start.valueOf(),
-          tags,
-          billable
-        })
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/time_entries`, {
+    method: 'POST',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    },
+    json: {
+      description,
+      tid: taskId,
+      start: start.valueOf(),
+      duration: end.valueOf() - start.valueOf(),
+      tags,
+      billable
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data;
 };
 
-const updateTimeTrackingEntry = (
+const updateTimeTrackingEntry = async (
   entryId,
   description,
   start,
@@ -298,145 +229,87 @@ const updateTimeTrackingEntry = (
   tags,
   billable
 ) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'PUT',
-        url: `${teamRootUrl()}/time_entries/${entryId}`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          tag_action: 'replace',
-          description,
-          start: start.valueOf(),
-          end: end.valueOf(),
-          duration: end.valueOf() - start.valueOf(),
-          tags,
-          billable
-        })
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data[0]);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/time_entries`, {
+    method: 'POST',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    },
+    json: {
+      tag_action: 'replace',
+      description,
+      start: start.valueOf(),
+      end: end.valueOf(),
+      duration: end.valueOf() - start.valueOf(),
+      tags,
+      billable
+    }
+  }).json();
+
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data[0];
 };
 
-const deleteTimeTrackingEntry = (entryId) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'DELETE',
-        url: `${teamRootUrl()}/time_entries/${entryId}`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data[0]);
-      }
-    );
-  });
+const deleteTimeTrackingEntry = async (entryId) => {
+  const response = await ky(`${teamRootUrl()}/time_entries/${entryId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+
+  if (response?.ECODE) throw new Error(response?.ECODE);
+
+  return response.data[0];
 };
 
-const currentTimeTrackingEntry = () => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        url: `${teamRootUrl()}/time_entries/current`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data);
-      }
-    );
-  });
+const currentTimeTrackingEntry = async () => {
+  const response = await ky(`${teamRootUrl()}/time_entries/current`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || null;
 };
 
-const startTimeTrackingEntry = (taskId, description, tags, billable) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'POST',
-        url: `${teamRootUrl()}/time_entries/start`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          tid: taskId,
-          description,
-          tags,
-          billable
-        })
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data);
-      }
-    );
-  });
+const startTimeTrackingEntry = async (taskId, description, tags, billable) => {
+  const response = await ky(`${teamRootUrl()}/time_entries/start`, {
+    method: 'POST',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    },
+    json: {
+      tid: taskId,
+      description,
+      tags,
+      billable
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || null;
 };
 
-const stopTimeTrackingEntry = () => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'POST',
-        url: `${teamRootUrl()}/time_entries/stop`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.data);
-      }
-    );
-  });
+const stopTimeTrackingEntry = async () => {
+  const response = await ky(`${teamRootUrl()}/time_entries/stop`, {
+    method: 'POST',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || null;
 };
 
 const getTags = async () => {
-  return await new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: `${teamRootUrl()}/time_entries/tags`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data || []);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/time_entries/tags`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.data || [];
 };
 
 const getCachedTags = async () => {
@@ -465,25 +338,14 @@ const clearCachedTags = () => {
 };
 
 const getSpaces = async () => {
-  return await new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: `${teamRootUrl()}/space`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.spaces || []);
-      }
-    );
-  });
+  const response = await ky(`${teamRootUrl()}/space`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.spaces || [];
 };
 
 const getCachedSpaces = async () => {
@@ -514,25 +376,14 @@ const clearCachedSpaces = () => {
 };
 
 const getFolders = async (space) => {
-  return await new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: `${BASE_URL}/space/${space}/folder`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.folders || []);
-      }
-    );
-  });
+  const response = await ky(`${BASE_URL}/space/${space}/folder`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.folders || [];
 };
 
 const getCachedFolders = async (space) => {
@@ -562,25 +413,14 @@ const clearCachedFolders = (space) => {
 };
 
 const getLists = async (folder) => {
-  return await new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        mode: 'no-cors',
-        url: `${BASE_URL}/folder/${folder}/list`,
-        headers: {
-          Authorization: store.get('settings.clickup_access_token'),
-          'Content-Type': 'application/json'
-        }
-      },
-      (error, response) => {
-        if (error) return reject(error);
-        const data = response?.body ? JSON.parse(response.body) : null;
-        if (error || data?.ECODE) return reject(error || data);
-        resolve(data.lists || []);
-      }
-    );
-  });
+  const response = await ky(`${BASE_URL}/folder/${folder}/list`, {
+    method: 'GET',
+    headers: {
+      Authorization: store.get('settings.clickup_access_token')
+    }
+  }).json();
+  if (response?.ECODE) throw new Error(response?.ECODE);
+  return response.lists || [];
 };
 
 const getCachedLists = async (folder) => {
