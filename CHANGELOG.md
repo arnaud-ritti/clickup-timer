@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.1...v1.1.2) (2023-06-15)
+
+
+### Bug Fixes
+
+* **updater:** disable Github token usage ([a1f7174](https://github.com/arnaud-ritti/clickup-timer/commit/a1f71749bb71cee489ada033579e12636e3d9785))
+
 ## [1.1.1](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.0...v1.1.1) (2023-06-15)
 
 
