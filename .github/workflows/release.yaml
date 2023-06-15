@@ -57,14 +57,21 @@ jobs:
       - name: Install Node dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Release 
+      - name: Release (Ubuntu / Debian - x64)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: yarn run publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Release (Windows - x64)
+        if: startsWith(matrix.os, 'windows')
         run: yarn run publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release (MacOS arm64)
+      - name: Release (MacOS - x64,arm64)
         if: startsWith(matrix.os, 'macos')
-        run: yarn run publish --arch arm64
+        run: yarn run publish --arch=x64,arm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
