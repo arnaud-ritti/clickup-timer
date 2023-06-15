@@ -1,92 +1,88 @@
 import { app, dialog, shell } from 'electron';
-import { autoUpdater } from 'electron-updater';
+
 import i18next from '@core/i18n';
 const i18n = i18next.init();
 
+const GH_UPDATE_TOKEN = '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';
+const GH_UPDATE_REPO = 'arnaud-ritti/clickup-timer';
+
 class AppUpdater {
   updater;
-
-  constructor() {
-    autoUpdater.autoDownload = true;
+  repository;
+  token;
+  constructor(repository, token) {
+    this.repository = repository;
+    this.token = token;
+    this.updater = new Set();
   }
 
-  async bindEvents() {
+  async checkUpdates() {
     await i18n.changeLanguage(app.getLocale() ?? 'en');
+    if (!app.isPackaged) return;
 
-    autoUpdater.on('error', (error) => {
-      dialog
-        .showMessageBox({
-          type: 'error',
-          title: i18n.t('update.error.title'),
-          message: i18n.t('update.error.message'),
-          buttons: [
-            i18n.t('update.error.buttons.download'),
-            i18n.t('update.error.buttons.cancel')
-          ]
-        })
-        .then((result) => {
-          if (result.response === 0) {
-            shell.openExternal(
-              'https://github.com/arnaud-ritti/clickup-timer/releases/latest'
-            );
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${this.repository}/releases`,
+        {
+          headers: this.token ? { authorization: `token ${this.token}` } : {}
+        }
+      );
+      const json = await res.json();
+      const latest = json[0];
+      if (!latest) return;
+
+      // Remove leading v
+      const latestVersion = latest.tag_name.startsWith('v')
+        ? latest.tag_name.slice(1)
+        : latest.tag_name;
+
+      if (latestVersion != app.getVersion()) {
+        dialog.showMessageBox(
+          {
+            type: 'info',
+            title: i18n.t('update.available.title'),
+            message: i18n.t('update.available.message', {
+              name: app.getName()
+            }),
+            buttons: [
+              i18n.t('update.available.buttons.download'),
+              i18n.t('update.available.buttons.sponsor'),
+              i18n.t('update.available.buttons.cancel')
+            ],
+            defaultId: 0
+          },
+          (res) => {
+            this.updater.forEach((item) => {
+              item.enabled = false;
+            });
+            switch (result.response) {
+              case 0:
+                shell.openExternal(latest.html_url);
+                break;
+              case 1:
+                shell.openExternal('https://ko-fi.com/arnaudritti');
+                break;
+            }
           }
-        });
-
-      console.error(error);
-    });
-
-    autoUpdater.on('update-available', () => {
-      dialog
-        .showMessageBox({
-          type: 'info',
-          title: i18n.t('update.available.title'),
-          message: i18n.t('update.available.message', { name: app.getName() }),
-          buttons: [
-            i18n.t('update.available.buttons.download'),
-            i18n.t('update.available.buttons.sponsor'),
-            i18n.t('update.available.buttons.cancel')
-          ]
-        })
-        .then((result) => {
-          if (this.updater) {
-            this.updater.enabled = true;
-          }
-          switch (result.response) {
-            case 0:
-              shell.openExternal(
-                'https://github.com/arnaud-ritti/clickup-timer/releases/latest'
-              );
-              break;
-            case 1:
-              shell.openExternal('https://ko-fi.com/arnaudritti');
-              break;
-          }
-        });
-    });
-
-    autoUpdater.on('update-not-available', () => {
-      dialog.showMessageBox({
-        title: i18n.t('update.noUpdate.title'),
-        message: i18n.t('update.noUpdate.message')
-      });
-      if (this.updater) {
-        this.updater.enabled = true;
-        this.updater = null;
+        );
       }
-    });
-  }
-
-  checkForUpdatesAndNotify() {
-    autoUpdater.checkForUpdatesAndNotify();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   checkForUpdates(menuItem) {
-    this.updater = menuItem;
-    if (this.updater) {
-      this.updater.enabled = false;
+    if (menuItem) {
+      if (!this.updater.has(menuItem)) {
+        this.updater.add(menuItem);
+      }
+      this.updater.forEach((item) => {
+        item.enabled = false;
+      });
     }
-    autoUpdater.checkForUpdates();
+
+    this.checkUpdates();
   }
 }
 
-export default new AppUpdater();
+export default new AppUpdater(GH_UPDATE_REPO, GH_UPDATE_TOKEN);

@@ -1,8 +1,6 @@
 import { BrowserWindow } from 'electron';
-import updater from '@core/electron/updater';
 import MenuBuilder from '@core/electron/menu';
 import TouchBarBuilder from '@core/electron/touchbar';
-import TrayBuilder from '@core/electron/tray';
 
 export async function createWindow() {
   if (global.windows.has('main')) {
@@ -21,7 +19,8 @@ export async function createWindow() {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     }
   });
 
@@ -34,7 +33,6 @@ export async function createWindow() {
 
   await new MenuBuilder(mainWindow).buildMenu();
   await new TouchBarBuilder(mainWindow).buildTouchBar();
-  await new TrayBuilder(mainWindow).buildTray();
 
   global.windows.set('main', mainWindow);
 
@@ -66,7 +64,8 @@ export function createSettingsWindow() {
       preload: SETTINGS_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     }
   });
 
@@ -107,7 +106,8 @@ export function createTaskDetailsWindow(entry) {
       preload: DETAILS_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     }
   });
 
@@ -148,7 +148,8 @@ export function createCreateEntryWindow(entry) {
       preload: CREATE_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     }
   });
 
@@ -192,7 +193,8 @@ export function createCreateTimerWindow() {
       preload: TIMER_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     }
   });
 

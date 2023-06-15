@@ -31,9 +31,18 @@
     :locale="$i18next.language"
     ref="calendar"
   >
-    <template v-slot:title="{ title }">
+    <template v-slot:title="{ title, view }">
       <div class="flex items-center space-x-4">
-        <span type="false" aria-label="false">{{ title }}</span>
+        <span type="false" aria-label="false">
+          {{ title }}
+          <div
+            v-if="hasTimeTracked(view.events)"
+            class="badge badge-neutral mx-2 p-1"
+          >
+            <clock-icon class="w-3 mr-1" />
+            <span>{{ totalHours(view.events) }}</span>
+          </div>
+        </span>
 
         <!-- START | Extra controls -->
         <div
@@ -452,6 +461,24 @@ export default {
       return Boolean(
         events.find((event) => event.start.getDate() == date.getDate())
       );
+    },
+    totalHours: function (events) {
+      let totalMinutes = events.reduce(
+        (carry, event) =>
+          carry + (event.endTimeMinutes - event.startTimeMinutes),
+        0
+      );
+      let hours = Math.floor(totalMinutes / 60);
+      let minutes = totalMinutes % 60;
+
+      if (totalMinutes === 0) {
+        return;
+      }
+
+      return hours + ':' + String(minutes).padStart(2, '0');
+    },
+    hasTimeTracked: function (events) {
+      return Boolean(events.length);
     }
   }
 };
