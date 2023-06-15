@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.0...v1.1.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **security:** migrate from request to ky ([#11](https://github.com/arnaud-ritti/clickup-timer/issues/11)) ([512de5f](https://github.com/arnaud-ritti/clickup-timer/commit/512de5ff4813546f4d494907cb186bb83eb15b20))
+
 ## [1.1.0](https://github.com/arnaud-ritti/clickup-timer/compare/v1.0.0...v1.1.0) (2023-06-14)
 
 
