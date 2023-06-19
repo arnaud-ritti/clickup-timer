@@ -26,7 +26,7 @@ const options = {
     ),
     ipcRenderer: mainProcess ? undefined : window.api.i18nextElectronBackend
   },
-  debug: !(app || window).isPackaged,
+  debug: false,// !(app || window).isPackaged,
   saveMissing: false,
   saveMissingTo: 'current',
   namespace: 'translation',

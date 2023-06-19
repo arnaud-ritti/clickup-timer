@@ -415,12 +415,6 @@ export default {
 
           if (eventIndex === -1) return;
 
-          console.dir({
-            before: this.events[eventIndex],
-            after: entry,
-            index: eventIndex
-          });
-
           this.events[eventIndex] = eventFactory.updateFromRemote(
             this.events[eventIndex],
             entry

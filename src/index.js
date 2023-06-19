@@ -57,10 +57,8 @@ app.on('ready', async () => {
   clearMainBindings(ipcMain);
   mainBindings(ipcMain, fs);
 
-  await new TrayBuilder().buildTray();
-
   await createWindow();
-
+  new TrayBuilder();
   await updater.checkForUpdates();
 });
 

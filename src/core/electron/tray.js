@@ -14,32 +14,25 @@ export default class TrayBuilder {
   tray;
 
   constructor() {
+    const trayIcon = nativeImage.createFromPath(
+      path.join(__dirname, 'assets/images/icon/trayTemplate.png')
+    ).resize({ width: 16, height: 16 });
+    trayIcon.setTemplateImage(true);
+    this.tray = new Tray(trayIcon);
+
     global.currentTimerObserver.on('change', (timer) => {
-      this.buildTray();
+      this.buildTray(timer);
     });
   }
 
-  async buildTray() {
+  async buildTray(timer) {
     await i18n.changeLanguage(app.getLocale() ?? 'en');
-
-    if (!this.tray) {
-      const image = await nativeImage.createThumbnailFromPath(
-        path.join(__dirname, 'assets/images/icon/trayTemplate.png'),
-        {
-          width: 16,
-          height: 16
-        }
-      );
-      image.setTemplateImage(true);
-      this.tray = new Tray(image);
-    }
-
-    const template = this.buildTemplate();
+    const template = this.buildTemplate(timer);
     const contextMenu = Menu.buildFromTemplate(template);
 
-    if (global.currentTimerObserver?.getTimer()) {
+    if (timer) {
       contextMenu.getMenuItemById('stop-timer').enabled = true;
-      this.tray.setToolTip(global.currentTimerObserver?.getTimer().task.name);
+      this.tray.setToolTip(timer.task.name);
       this.tray.setTitle(global.currentTimerObserver?.getTime(), {
         fontType: 'monospacedDigit'
       });
@@ -50,7 +43,7 @@ export default class TrayBuilder {
     this.tray.setContextMenu(contextMenu);
   }
 
-  buildTemplate() {
+  buildTemplate(timer) {
     const template = [
       {
         label: i18n.t('tray.startTimer'),
@@ -63,7 +56,7 @@ export default class TrayBuilder {
         id: 'stop-timer',
         label: i18n.t('tray.stopTimer'),
         accelerator: 'Shift+CommandOrControl+S',
-        enabled: !!global.currentTimerObserver?.getTimer(),
+        enabled: !!timer,
         click: () => {
           stopTimeTrackingEntry();
         }

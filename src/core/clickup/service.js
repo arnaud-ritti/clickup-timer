@@ -229,8 +229,8 @@ const updateTimeTrackingEntry = async (
   tags,
   billable
 ) => {
-  const response = await ky(`${teamRootUrl()}/time_entries`, {
-    method: 'POST',
+  const response = await ky(`${teamRootUrl()}/time_entries/${entryId}`, {
+    method: 'PUT',
     headers: {
       Authorization: store.get('settings.clickup_access_token')
     },

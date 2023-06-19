@@ -76,7 +76,6 @@
     "ky-universal": "^0.11.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
-    "request": "^2.88.2",
     "v-offline": "^3.4.0",
     "vue": "^3.3.4",
     "vue-cal": "^4.8.1",
