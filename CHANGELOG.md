@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.2...v1.1.3) (2023-06-19)
+
+
+### Bug Fixes
+
+* tray icon and move times ([76208b6](https://github.com/arnaud-ritti/clickup-timer/commit/76208b67abbcca71810e84c0a4015f388e7893de))
+
 ## [1.1.2](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.1...v1.1.2) (2023-06-15)
 
 
