@@ -1,6 +1,6 @@
 repository:
   name: clickup-timer
-  description: A Symfony bundle for mosparo spam protection
+  description: A tool for tracking time on ClickUp tasks
   topics: clickup,timer,time-tracking
   private: false
   has_issues: true
