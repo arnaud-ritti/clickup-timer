@@ -1,3 +1,5 @@
+import store from '@core/store';
+
 export default {
   fromTimer: function (entry) {
     return {
@@ -19,7 +21,7 @@ export default {
   },
 
   fromClickup: function (entry) {
-    if (!entry.task) return false;
+    if (!entry.task) return (store.get('settings.show_unassigned_task') ?? false) ? this.entryUnasigned(entry) : false;
     if (entry.task === '0') return this.entryWithoutTask(entry);
 
     const editable =
@@ -59,6 +61,26 @@ export default {
       start: new Date(entry.start),
       end: new Date(entry.end),
       duration: Number(entry.endTimeMinutes) - Number(entry.startTimeMinutes)
+    };
+  },
+
+  entryUnasigned: function (entry) {
+    return {
+      entryId: entry.id,
+      taskId: null,
+      title: 'Unassigned time entry',
+      taskUrl: false,
+      task: null,
+      task_location: null,
+      description: entry.description,
+      start: new Date(Number(entry.start)),
+      end: new Date(Number(entry.start) + Number(entry.duration)),
+
+      // No task is attached. Disable mutations
+      draggable: false,
+      resizable: false,
+      deletable: false,
+      class: 'not-editable'
     };
   },
 

@@ -47,9 +47,9 @@
         <!-- START | Extra controls -->
         <div
           class="flex space-x-1 text-base-content"
-          style="-webkit-app-region: no-drag"
         >
           <button
+            type="button"
             v-if="store.get('settings.admin_features_enabled')"
             @click="memberSelectorOpen = !memberSelectorOpen"
           >

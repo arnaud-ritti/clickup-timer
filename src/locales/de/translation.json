@@ -45,6 +45,7 @@
     "uiTheme": "UI-Thema",
     "showWeekends": "Wochenenden anzeigen",
     "requireDescriptions": "Beschreibungen erforderlich",
+    "showUnassingedTask": "Nicht zugewiesene Aufgaben anzeigen",
     "defaultBillable": "Standardmäßig als abrechenbar markieren",
     "dangerZone": "Gefahrenzone",
     "enableAdmin": {

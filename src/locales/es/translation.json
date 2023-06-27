@@ -46,6 +46,7 @@
     "showWeekends": "Mostrar fines de semana",
     "requireDescriptions": "Requerir descripciones",
     "defaultBillable": "Marcar como facturable de forma predeterminada",
+    "showUnassingedTask": "Mostrar tareas no asignadas",
     "dangerZone": "Zona de peligro",
     "enableAdmin": {
       "main": "Habilitar funciones de administrador",

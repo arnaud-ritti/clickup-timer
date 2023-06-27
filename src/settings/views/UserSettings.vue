@@ -157,6 +157,19 @@
           <div class="form-control w-full">
             <label class="label cursor-pointer">
               <span class="label-text">
+                {{ $t('settings.showUnassingedTask') }}
+              </span>
+              <input
+                v-model="model.show_unassigned_task"
+                type="checkbox"
+                class="toggle"
+              />
+            </label>
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label cursor-pointer">
+              <span class="label-text">
                 {{ $t('settings.enableAdmin.main') }}
 
                 <span class="block label-text-alt">{{
@@ -170,7 +183,7 @@
               />
             </label>
           </div>
-
+          
           <div class="divider">{{ $t('settings.dangerZone') }}</div>
 
           <n-popconfirm
@@ -335,6 +348,8 @@ export default {
         title: this.$t('notification.settingsSaved'),
         duration: 1500
       });
+
+      ipcRenderer.send('reload');
       window.close();
     },
     flushCaches: function () {

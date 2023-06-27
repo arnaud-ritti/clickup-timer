@@ -74,10 +74,10 @@
           </div>
         </div>
       </div>
-      <div class="dropdown dropdown-end no-drag">
+      <div class="dropdown dropdown-end">
         <label
           tabindex="0"
-          class="btn btn-ghost btn-circle avatar"
+          class="btn btn-ghost btn-circle avatar no-drag"
           :class="{ placeholder: !user?.profilePicture }"
         >
           <div

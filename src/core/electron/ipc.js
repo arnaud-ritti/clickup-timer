@@ -177,6 +177,12 @@ ipcMain.on('sync', (event) => {
   //clickupService.sync();
 });
 
+ipcMain.on('reload', (event) => {
+  BrowserWindow.getAllWindows().forEach((window) => {
+    window.reload()
+  });
+});
+
 ipcMain.on('quit-app', (event) => {
   app.quit();
 });

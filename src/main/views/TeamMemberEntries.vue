@@ -30,7 +30,6 @@
         <!-- START | Extra controls -->
         <div
           class="flex space-x-1 text-base-content"
-          style="-webkit-app-region: no-drag"
         >
           <router-link :to="{ name: 'time-tracker' }" replace>
             <user-icon class="w-5" />
@@ -169,6 +168,7 @@ import '@assets/vuecal.css';
 import store from '@core/store';
 import eventFactory from '@core/clickup/events-factory';
 import clickupService from '@core/clickup/service';
+import { isEmptyObject, timeToMinutes } from '@core/helpers';
 
 import { UserIcon } from '@heroicons/vue/20/solid';
 import { ClockIcon, PencilIcon } from '@heroicons/vue/24/outline';
@@ -251,10 +251,32 @@ export default {
     },
     onTaskDoubleClick: function (event, e) {
       this.selectedTask = event;
-      ipcRenderer.send('open-task-details', {
+      if(event.taskId){
+        ipcRenderer.send('open-task-details', {
         entry: eventFactory.fromEvent(event)
       });
+      }
       e?.stopPropagation();
+    },
+    deleteSelectedTask: function () {
+      if (isEmptyObject(this.selectedTask)) return;
+      clickupService
+        .deleteTimeTrackingEntry(this.selectedTask.entryId)
+        .then(() => {
+          const taskIndex = this.events.findIndex(
+            (event) => event.entryId === this.selectedTask.entryId
+          );
+
+          this.events.splice(taskIndex, 1);
+          this.selectedTask = {};
+        })
+        .catch((error) =>
+          this.error({
+            error,
+            title: this.$t('notification.delete.title'),
+            content: this.$t('notification.delete.content')
+          })
+        );
     },
     totalHoursOnDate: function (date, events) {
       let totalMinutes = events

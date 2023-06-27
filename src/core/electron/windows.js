@@ -13,7 +13,7 @@ export async function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 720,
-    titleBarStyle: 'hidden',
+    titleBarStyle: 'hiddenInset',
     icon: './src/assets/images/icon/icon.png',
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,

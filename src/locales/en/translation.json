@@ -46,6 +46,7 @@
     "showWeekends": "Show weekends",
     "requireDescriptions": "Require descriptions",
     "defaultBillable": "Mark as billable by default",
+    "showUnassingedTask": "Display unassigned tasks",
     "dangerZone": "Danger zone",
     "enableAdmin": {
       "main": "Enable admin features",

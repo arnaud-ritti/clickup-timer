@@ -47,6 +47,7 @@
     "requireDescriptions": "Exiger des descriptions",
     "defaultBillable": "Marquer comme facturable par défaut",
     "dangerZone": "Zone dangereuse",
+    "showUnassingedTask": "Voir les tâches non assignées",
     "enableAdmin": {
       "main": "Activer les fonctionnalités d'administration",
       "sub": "Vous devez être administrateur de CU pour utiliser cela"
