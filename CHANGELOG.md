@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.3...v1.1.4) (2023-06-27)
+
+
+### Bug Fixes
+
+* handle / render unassigned time entries ([ccc7c3e](https://github.com/arnaud-ritti/clickup-timer/commit/ccc7c3eaa8876f8545cb5dd17c3ddc7c32fdfc25))
+
 ## [1.1.3](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.2...v1.1.3) (2023-06-19)
 
 
