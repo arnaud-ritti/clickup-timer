@@ -230,7 +230,8 @@ export default {
           this.timeEntry.start,
           this.timeEntry.end,
           this.timeEntry.tags,
-          this.timeEntry.billable
+          this.timeEntry.billable,
+          this.timeEntry.task.id
         )
         .then(() => {
           console.dir(

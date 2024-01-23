@@ -16,7 +16,7 @@
     "name": "Arnaud RITTI",
     "email": "arnaud.ritti@adeliom.com"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

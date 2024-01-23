@@ -405,7 +405,8 @@ export default {
           event.start,
           event.end,
           event.tags,
-          event.billable
+          event.billable,
+          event.task.id
         )
         .then((entry) => {
           // Update the modeled event so copy/paste/duplicate works properly

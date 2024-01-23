@@ -226,8 +226,9 @@ const updateTimeTrackingEntry = async (
   description,
   start,
   end,
-  tags,
-  billable
+  tags = [],
+  billable = false,
+  taskId
 ) => {
   const response = await ky(`${teamRootUrl()}/time_entries/${entryId}`, {
     method: 'PUT',
@@ -236,10 +237,10 @@ const updateTimeTrackingEntry = async (
     },
     json: {
       tag_action: 'replace',
+      tid: taskId,
       description,
-      start: start.valueOf(),
-      end: end.valueOf(),
-      duration: end.valueOf() - start.valueOf(),
+      start: Math.min(start.valueOf(), end.valueOf()),
+      duration: Math.abs(end.valueOf() - start.valueOf()),
       tags,
       billable
     }
