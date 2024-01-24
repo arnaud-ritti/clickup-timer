@@ -63,7 +63,6 @@
     "@electron/remote": "^2.0.9",
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.18",
-    "@julusian/midi": "^3.0.1",
     "@leeoniya/ufuzzy": "^1.0.7",
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
