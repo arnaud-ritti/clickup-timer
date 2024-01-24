@@ -306,7 +306,7 @@
             </label>
             <Combobox
               v-model="model.task"
-              @update:modelValue="value => value ? focusNext() : false"
+              @update:modelValue="(value) => (value ? focusNext() : false)"
               :disabled="!model.list"
             >
               <div class="relative mt-1">

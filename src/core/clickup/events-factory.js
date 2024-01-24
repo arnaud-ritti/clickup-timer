@@ -21,7 +21,10 @@ export default {
   },
 
   fromClickup: function (entry) {
-    if (!entry.task) return (store.get('settings.show_unassigned_task') ?? false) ? this.entryUnasigned(entry) : false;
+    if (!entry.task)
+      return store.get('settings.show_unassigned_task') ?? false
+        ? this.entryUnasigned(entry)
+        : false;
     if (entry.task === '0') return this.entryWithoutTask(entry);
 
     const editable =

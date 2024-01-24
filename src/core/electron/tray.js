@@ -14,9 +14,11 @@ export default class TrayBuilder {
   tray;
 
   constructor() {
-    const trayIcon = nativeImage.createFromPath(
-      path.join(__dirname, 'assets/images/icon/trayTemplate.png')
-    ).resize({ width: 16, height: 16 });
+    const trayIcon = nativeImage
+      .createFromPath(
+        path.join(__dirname, 'assets/images/icon/trayTemplate.png')
+      )
+      .resize({ width: 16, height: 16 });
     trayIcon.setTemplateImage(true);
     this.tray = new Tray(trayIcon);
 

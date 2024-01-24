@@ -183,7 +183,7 @@
               />
             </label>
           </div>
-          
+
           <div class="divider">{{ $t('settings.dangerZone') }}</div>
 
           <n-popconfirm

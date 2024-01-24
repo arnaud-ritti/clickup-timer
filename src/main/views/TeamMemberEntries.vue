@@ -28,9 +28,7 @@
         <span type="false" aria-label="false">{{ title }}</span>
 
         <!-- START | Extra controls -->
-        <div
-          class="flex space-x-1 text-base-content"
-        >
+        <div class="flex space-x-1 text-base-content">
           <router-link :to="{ name: 'time-tracker' }" replace>
             <user-icon class="w-5" />
           </router-link>
@@ -251,10 +249,10 @@ export default {
     },
     onTaskDoubleClick: function (event, e) {
       this.selectedTask = event;
-      if(event.taskId){
+      if (event.taskId) {
         ipcRenderer.send('open-task-details', {
-        entry: eventFactory.fromEvent(event)
-      });
+          entry: eventFactory.fromEvent(event)
+        });
       }
       e?.stopPropagation();
     },

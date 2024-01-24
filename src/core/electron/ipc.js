@@ -179,7 +179,7 @@ ipcMain.on('sync', (event) => {
 
 ipcMain.on('reload', (event) => {
   BrowserWindow.getAllWindows().forEach((window) => {
-    window.reload()
+    window.reload();
   });
 });
 

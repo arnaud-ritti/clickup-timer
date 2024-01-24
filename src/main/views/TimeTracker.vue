@@ -45,9 +45,7 @@
         </span>
 
         <!-- START | Extra controls -->
-        <div
-          class="flex space-x-1 text-base-content"
-        >
+        <div class="flex space-x-1 text-base-content">
           <button
             type="button"
             v-if="store.get('settings.admin_features_enabled')"
