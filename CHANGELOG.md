@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.5](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.4...v1.1.5) (2024-01-24)
+
+
+### Bug Fixes
+
+* trigger update ([cdac1f4](https://github.com/arnaud-ritti/clickup-timer/commit/cdac1f4f061436562b76490b1983f5789e2a8972))
+* update clickup api ([e9583a5](https://github.com/arnaud-ritti/clickup-timer/commit/e9583a5a4fb9c3a7c328fbe711634df86a6857b5))
+* update deps ([6baec00](https://github.com/arnaud-ritti/clickup-timer/commit/6baec00648cf0a2080c359b876d3a30f855e4994))
+
 ## [1.1.4](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.3...v1.1.4) (2023-06-27)
 
 
