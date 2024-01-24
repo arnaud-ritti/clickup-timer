@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.6](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.5...v1.1.6) (2024-01-24)
+
+
+### Bug Fixes
+
+* deps build ([080538e](https://github.com/arnaud-ritti/clickup-timer/commit/080538ef9f09f2cfb11d0e2929a2f942987b5810))
+
 ## [1.1.5](https://github.com/arnaud-ritti/clickup-timer/compare/v1.1.4...v1.1.5) (2024-01-24)
 
 
